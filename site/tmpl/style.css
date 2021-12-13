@@ -1,0 +1,35 @@
+body {
+    font-family: sans-serif;
+}
+
+#comps-top-row {
+    position: sticky;
+    top: 0;
+    background: white;
+}
+
+.filename {
+    font-family: monospace;
+    text-align: left;
+}
+
+#comp-table {
+    border-spacing: 0;
+}
+
+#comp-table td {
+    width: 7.5rem;
+}
+
+.best-engine {
+    font-weight: bold;
+    color: black !important;
+}
+
+body {
+    margin: 1px;
+}
+
+a {
+    text-decoration: none;
+}
