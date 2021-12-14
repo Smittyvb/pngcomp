@@ -13,11 +13,9 @@ const images = Object.keys(DATA.engines.engine0.runs).sort((a, b) => {
     if (a > b) return 1;
     return 0;
 });
-console.log("wut", Object.keys(DATA.engines))
 const engines = Object.keys(DATA.engines).sort((a, b) => {
     const aSum = Object.values(DATA.engines[a].runs).reduce((sum, run) => sum + run.outSize ? +getFrac(run.inSize, run.outSize) : -100, 0);
     const bSum = Object.values(DATA.engines[b].runs).reduce((sum, run) => sum + run.outSize ? +getFrac(run.inSize, run.outSize) : -100, 0);
-    console.log("SUM", a, aSum, b, bSum)
     if (aSum < bSum) return -1;
     if (aSum > bSum) return 1;
     return 0;
@@ -75,6 +73,16 @@ fs.writeFileSync(
                         }).join("") +
                         `<td style="${getStyle(inSize, bestOut)}">${getFrac(inSize, bestOut)}%</td></tr>`;
                 })
+                .concat([
+                    '<tr><th scope="row">Average</th>',
+                    engines.map(engine => {
+                        const sum = Object.values(DATA.engines[engine].runs)
+                            .reduce((sum, run) => sum + (run.outSize ? (run.outSize / run.inSize) : 1), 0);
+                        const avg = (sum / Object.values(DATA.engines[engine].runs).length) - 1;
+                        return `<td>${(avg * 100).toFixed(2)}%</td>`;
+                    }).join(""),
+                    "</tr>",
+                ])
                 .join("")
         )
 );
