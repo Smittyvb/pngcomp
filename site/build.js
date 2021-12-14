@@ -13,11 +13,13 @@ const images = Object.keys(DATA.engines.engine0.runs).sort((a, b) => {
     if (a > b) return 1;
     return 0;
 });
+console.log("wut", Object.keys(DATA.engines))
 const engines = Object.keys(DATA.engines).sort((a, b) => {
-    const aSum = Object.values(DATA.engines[a].runs).reduce((sum, run) => sum + getFrac(run.inSize, run.outSize), 0);
-    const bSum = Object.values(DATA.engines[b].runs).reduce((sum, run) => sum + getFrac(run.inSize, run.outSize), 0);
-    if (aSum < bSum) return 1;
-    if (aSum > bSum) return -1;
+    const aSum = Object.values(DATA.engines[a].runs).reduce((sum, run) => sum + run.outSize ? +getFrac(run.inSize, run.outSize) : -100, 0);
+    const bSum = Object.values(DATA.engines[b].runs).reduce((sum, run) => sum + run.outSize ? +getFrac(run.inSize, run.outSize) : -100, 0);
+    console.log("SUM", a, aSum, b, bSum)
+    if (aSum < bSum) return -1;
+    if (aSum > bSum) return 1;
     return 0;
 });
 
