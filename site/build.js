@@ -50,8 +50,6 @@ fs.writeFileSync(
         .replace("%COMPRESSORS%", engines.map(key => `<th scope="col" id="${key}"><a href="${DATA.engines[key].uri}">${DATA.engines[key].name}</a></th>`).join(""))
         .replace("%IMAGES%",
             images
-                // if oxipng rejects it, hide it
-                .filter(img => DATA.engines.engine4.runs[img].outSize !== null)
                 .map(img => {
                     const notSame = DATA.engines.engine0.runs[img].notSame;
                     const inSize = DATA.engines.engine0.runs[img].inSize;
